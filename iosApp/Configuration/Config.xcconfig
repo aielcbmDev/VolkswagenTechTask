@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=VolkswagenTechTask
+PRODUCT_BUNDLE_IDENTIFIER=com.something.volkswagentechtask.VolkswagenTechTask$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
