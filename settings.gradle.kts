@@ -29,3 +29,8 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
+include(":feature-weather:weatherApp")
+include(":feature-weather:domain")
+include(":feature-weather:core")
+include(":feature-weather:networking")
+include(":feature-weather:database")
