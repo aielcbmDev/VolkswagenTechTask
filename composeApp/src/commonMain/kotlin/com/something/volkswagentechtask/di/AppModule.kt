@@ -1,5 +1,6 @@
 package com.something.volkswagentechtask.di
 
+import com.charly.diqualifiers.DI_WEATHER_API_KEY
 import com.charly.weatherapp.ui.MainViewModel
 import com.something.volkswagentechtask.WeatherApiSecrets
 import org.koin.core.module.Module
@@ -11,12 +12,12 @@ internal expect val appPlatformModule: Module
 
 val appModule = module {
     includes(appPlatformModule)
-    single(named("WEATHER_API_KEY")) {
+    single(named(DI_WEATHER_API_KEY)) {
         get<WeatherApiSecrets>().getWeatherApiKey()
     }
     viewModel {
         MainViewModel(
-            weatherApiKey = get(named("WEATHER_API_KEY")),
+            weatherApiKey = get(named(DI_WEATHER_API_KEY)),
         )
     }
 }
