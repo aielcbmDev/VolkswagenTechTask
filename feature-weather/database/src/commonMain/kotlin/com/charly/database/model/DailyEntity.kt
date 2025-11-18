@@ -10,9 +10,7 @@ import androidx.room.PrimaryKey
 //      sunset INTEGER,
 //      summary TEXT,
 //      minTemp TEXT,
-//      maxTemp TEXT,
-//      weatherDescription TEXT,
-//      weatherIcon TEXT
+//      maxTemp TEXT
 //  );
 @Entity(
     tableName = "daily_weather_table"
@@ -25,7 +23,5 @@ data class DailyEntity(
     val sunset: Long? = null,
     val summary: String? = null,
     val minTemp: String? = null,
-    val maxTemp: String? = null,
-    val weatherDescription: String? = null,
-    val weatherIcon: String? = null
+    val maxTemp: String? = null
 )
