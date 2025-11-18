@@ -3,7 +3,7 @@ package com.charly.networking.datasource
 import com.charly.networking.WeatherApiService
 import com.charly.networking.model.DailyForecastWeatherData
 
-class NetworkingDataSource(
+class WeatherNetworkingDataSource(
     private val weatherApiService: WeatherApiService
 ) {
 

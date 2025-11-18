@@ -4,7 +4,7 @@ import com.charly.diqualifiers.DI_IS_DEBUG
 import com.charly.diqualifiers.DI_WEATHER_API_KEY
 import com.charly.networking.WeatherApiService
 import com.charly.networking.WeatherUnits
-import com.charly.networking.datasource.NetworkingDataSource
+import com.charly.networking.datasource.WeatherNetworkingDataSource
 import com.charly.networking.httpclient.HttpClientFactory
 import io.ktor.client.HttpClient
 import org.koin.core.module.Module
@@ -31,5 +31,5 @@ val networkingModule = module {
             httpClient = get()
         )
     }
-    factory<NetworkingDataSource> { NetworkingDataSource(get()) }
+    factory<WeatherNetworkingDataSource> { WeatherNetworkingDataSource(get()) }
 }

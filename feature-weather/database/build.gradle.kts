@@ -1,7 +1,14 @@
+import dev.mokkery.gradle.mokkery
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
     alias(libs.plugins.mokkeryPlugin)
     alias(libs.plugins.kotlinAllOpen)
 }
@@ -67,16 +74,24 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.sqlite.bundled)
         }
 
         commonTest.dependencies {
+            implementation(mokkery("coroutines"))
             implementation(libs.kotlinx.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
 
         androidMain.dependencies {
             // Add Android-specific dependencies here. Note that this source set depends on
             // commonMain by default and will correctly pull the Android artifacts of any KMP
             // dependencies declared in commonMain.
+            implementation(libs.koin.android)
+            implementation(libs.koin.core)
         }
 
         getByName("androidDeviceTest").dependencies {
@@ -93,6 +108,17 @@ kotlin {
             // KMP dependencies declared in commonMain.
         }
     }
+}
+
+dependencies {
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspIosX64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 // this check might require adjustment depending on your project type and the tasks that you use

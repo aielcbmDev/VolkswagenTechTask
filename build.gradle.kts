@@ -9,7 +9,10 @@ plugins {
     alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
     alias(libs.plugins.androidLint) apply false
     alias(libs.plugins.kotlinSerialization) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.room) apply false
     alias(libs.plugins.mokkeryPlugin) apply false
     alias(libs.plugins.kotlinAllOpen) apply false
     alias(libs.plugins.composeHotReload) apply false
+    alias(libs.plugins.secrets.gradle.plugin) apply false
 }

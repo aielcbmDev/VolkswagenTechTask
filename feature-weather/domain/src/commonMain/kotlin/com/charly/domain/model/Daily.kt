@@ -1,12 +1,12 @@
 package com.charly.domain.model
 
 data class Daily(
-    val dt: Int? = null,
-    val sunrise: Int? = null,
-    val sunset: Int? = null,
+    val dt: Long? = null,
+    val sunrise: Long? = null,
+    val sunset: Long? = null,
     val summary: String? = null,
-    val minTemp: Double? = null,
-    val maxTemp: Double? = null,
+    val minTemp: String? = null,
+    val maxTemp: String? = null,
     val weatherDescription: String? = null,
     val weatherIcon: String? = null
 )
