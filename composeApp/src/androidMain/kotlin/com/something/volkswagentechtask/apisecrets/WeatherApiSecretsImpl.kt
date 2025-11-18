@@ -1,4 +1,6 @@
-package com.something.volkswagentechtask
+package com.something.volkswagentechtask.apisecrets
+
+import com.something.volkswagentechtask.BuildConfig
 
 class WeatherApiSecretsImpl : WeatherApiSecrets {
 

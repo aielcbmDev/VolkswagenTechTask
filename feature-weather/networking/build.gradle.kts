@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.mokkeryPlugin)
     alias(libs.plugins.kotlinAllOpen)
 }
@@ -67,6 +68,11 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
 
         commonTest.dependencies {
@@ -77,6 +83,7 @@ kotlin {
             // Add Android-specific dependencies here. Note that this source set depends on
             // commonMain by default and will correctly pull the Android artifacts of any KMP
             // dependencies declared in commonMain.
+            implementation(libs.ktor.client.okhttp)
         }
 
         getByName("androidDeviceTest").dependencies {
@@ -91,6 +98,7 @@ kotlin {
             // part of KMP’s default source set hierarchy. Note that this source set depends
             // on common by default and will correctly pull the iOS artifacts of any
             // KMP dependencies declared in commonMain.
+            implementation(libs.ktor.client.darwin)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.something.volkswagentechtask
+package com.something.volkswagentechtask.apisecrets
 
 interface WeatherApiSecrets {
 
