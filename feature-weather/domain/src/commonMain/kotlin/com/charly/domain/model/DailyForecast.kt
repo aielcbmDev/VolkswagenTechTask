@@ -1,6 +1,6 @@
 package com.charly.domain.model
 
-data class Daily(
+data class DailyForecast(
     val id: Long = 0,
     val dt: Long? = null,
     val sunrise: Long? = null,

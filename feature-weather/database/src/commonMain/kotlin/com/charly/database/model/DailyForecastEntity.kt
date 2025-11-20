@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "daily_weather_table"
 )
-data class DailyEntity(
+data class DailyForecastEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val dt: Long? = null,

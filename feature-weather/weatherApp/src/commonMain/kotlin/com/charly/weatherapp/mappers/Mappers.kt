@@ -1,10 +1,10 @@
 package com.charly.weatherapp.mappers
 
-import com.charly.domain.model.Daily
+import com.charly.domain.model.DailyForecast
 import com.charly.weatherapp.formatdata.TimeFormatter
 import com.charly.weatherapp.model.DailyForecastModel
 
-internal fun Daily.mapToDailyForecastModel(
+internal fun DailyForecast.mapToDailyForecastModel(
     timeFormatter: TimeFormatter,
     noDataAvailable: String
 ): DailyForecastModel {
@@ -19,7 +19,7 @@ internal fun Daily.mapToDailyForecastModel(
     )
 }
 
-internal fun List<Daily>.mapToDailyForecastModelList(
+internal fun List<DailyForecast>.mapToDailyForecastModelList(
     timeFormatter: TimeFormatter,
     noDataAvailable: String
 ): List<DailyForecastModel> {

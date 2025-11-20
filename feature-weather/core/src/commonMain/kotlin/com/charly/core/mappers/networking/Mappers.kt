@@ -1,11 +1,11 @@
 package com.charly.core.mappers.networking
 
-import com.charly.database.model.DailyEntity
+import com.charly.database.model.DailyForecastEntity
 import com.charly.networking.model.DailyData
 import com.charly.networking.model.DailyForecastWeatherData
 
-private fun DailyData.mapToDailyEntity(): DailyEntity {
-    return DailyEntity(
+private fun DailyData.mapToDailyEntity(): DailyForecastEntity {
+    return DailyForecastEntity(
         dt = dt,
         sunrise = sunrise,
         sunset = sunset,
@@ -25,6 +25,6 @@ private fun DailyData.mapToDailyEntity(): DailyEntity {
  * production environment, this mapping would be expanded to include more fields, leading to a more
  * comprehensive data model and, consequently, a more complex database schema.
  */
-internal fun DailyForecastWeatherData.mapToDailyEntityList(): List<DailyEntity> {
+internal fun DailyForecastWeatherData.mapToDailyEntityList(): List<DailyForecastEntity> {
     return this.daily.map { it.mapToDailyEntity() }
 }
