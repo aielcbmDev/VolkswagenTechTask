@@ -34,21 +34,8 @@ class MainViewModel(
     }
 
     fun handleIntent(viewIntent: ViewIntent) {
-        val currentState = _state.value.uiState
-        if (currentState is UiState.Success) {
-            when (viewIntent) {
-                is ViewIntent.FetchDailyWeatherForecast -> fetchDailyWeatherForecast()
-                is ViewIntent.ViewDailyWeatherForecastDetail -> {}
-            }
-            return
-        }
-
-        // If state is Loading or Error, only restarting from scratch is allowed.
         when (viewIntent) {
             is ViewIntent.FetchDailyWeatherForecast -> fetchDailyWeatherForecast()
-            else -> {
-                /* Ignore invalid events for the current state. Do nothing. */
-            }
         }
     }
 
@@ -80,5 +67,4 @@ sealed interface UiState {
 
 sealed interface ViewIntent {
     object FetchDailyWeatherForecast : ViewIntent
-    data class ViewDailyWeatherForecastDetail(val id: Long) : ViewIntent
 }
