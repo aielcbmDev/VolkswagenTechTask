@@ -3,8 +3,8 @@ package com.something.volkswagentechtask.navigation
 sealed interface Destination {
     val route: String
 
-    data object Home : Destination {
-        override val route: String = "home"
+    data object Main : Destination {
+        override val route: String = "main"
     }
 
     data class Detail(val itemId: Long) : Destination {

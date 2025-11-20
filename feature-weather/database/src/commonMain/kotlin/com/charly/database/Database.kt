@@ -4,7 +4,7 @@ import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
-import com.charly.database.model.DailyDao
+import com.charly.database.model.DailyForecastDao
 import com.charly.database.model.DailyForecastEntity
 
 @Database(
@@ -13,7 +13,7 @@ import com.charly.database.model.DailyForecastEntity
 )
 @ConstructedBy(WeatherDatabaseConstructor::class)
 abstract class WeatherDatabase : RoomDatabase() {
-    abstract fun getDailyDao(): DailyDao
+    abstract fun getDailyDao(): DailyForecastDao
 }
 
 // The Room compiler generates the `actual` implementations.

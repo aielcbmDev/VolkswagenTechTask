@@ -11,13 +11,13 @@ fun MainScreen(
     onDailyForecastModelClick: (Long) -> Unit,
     onRetryButtonClicked: () -> Unit
 ) {
-    when (val uiState = mainScreenState.uiState) {
-        is UiState.Loading -> ScreenLoading()
-        is UiState.Success -> MainScreenSuccess(
+    when (val uiState = mainScreenState.mainUiState) {
+        is MainUiState.Loading -> ScreenLoading()
+        is MainUiState.Success -> MainScreenSuccess(
             dailyForecastModelList = uiState.dailyForecastModelList,
             onDailyForecastModelClick = onDailyForecastModelClick
         )
 
-        is UiState.Error -> ScreenError(onRetryButtonClicked)
+        is MainUiState.Error -> ScreenError(onRetryButtonClicked)
     }
 }

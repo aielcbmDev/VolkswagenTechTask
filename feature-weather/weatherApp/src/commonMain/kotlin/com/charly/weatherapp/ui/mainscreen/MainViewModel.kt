@@ -23,7 +23,7 @@ class MainViewModel(
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
-        _state.update { it.copy(uiState = UiState.Error) }
+        _state.update { it.copy(mainUiState = MainUiState.Error) }
     }
 
     private val _state = MutableStateFlow(MainScreenState())
@@ -40,29 +40,29 @@ class MainViewModel(
     }
 
     private fun fetchDailyWeatherForecast() {
-        _state.update { it.copy(uiState = UiState.Loading) }
+        _state.update { it.copy(mainUiState = MainUiState.Loading) }
         viewModelScope.launch(exceptionHandler) {
             getDailyWeatherForecastListUseCase.execute()
                 .map { it.mapToDailyForecastModelList(timeFormatter, "n/a") }
                 .flowOn(Dispatchers.IO)
                 .collect { dailyForecastModelList ->
-                    _state.update { it.copy(uiState = UiState.Success(dailyForecastModelList = dailyForecastModelList)) }
+                    _state.update { it.copy(mainUiState = MainUiState.Success(dailyForecastModelList = dailyForecastModelList)) }
                 }
         }
     }
 }
 
 data class MainScreenState(
-    val uiState: UiState = UiState.Loading
+    val mainUiState: MainUiState = MainUiState.Loading
 )
 
-sealed interface UiState {
+sealed interface MainUiState {
     data class Success(
         val dailyForecastModelList: List<DailyForecastModel>,
-    ) : UiState
+    ) : MainUiState
 
-    object Loading : UiState
-    object Error : UiState
+    object Loading : MainUiState
+    object Error : MainUiState
 }
 
 sealed interface ViewIntent {

@@ -1,7 +1,7 @@
 package com.charly.core.repositories
 
 import com.charly.core.cache.TimerCache
-import com.charly.core.mappers.database.mapToDailyList
+import com.charly.core.mappers.database.mapToDailyForecastList
 import com.charly.core.mappers.networking.mapToDailyEntityList
 import com.charly.database.datasources.WeatherDatabaseDataSource
 import com.charly.domain.model.DailyForecast
@@ -20,7 +20,7 @@ class GetDailyWeatherForecastListRepositoryImpl(
     override suspend fun execute(): Flow<List<DailyForecast>> {
         return weatherDatabaseDataSource.getDailyWeatherForecastList()
             .onStart { fetchAndSaveDailyWeatherForecast() }
-            .map { it.mapToDailyList() }
+            .map { it.mapToDailyForecastList() }
     }
 
     private suspend fun fetchAndSaveDailyWeatherForecast() {

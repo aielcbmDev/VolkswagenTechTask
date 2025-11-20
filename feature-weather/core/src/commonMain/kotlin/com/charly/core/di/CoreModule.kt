@@ -1,9 +1,11 @@
 package com.charly.core.di
 
 import com.charly.core.cache.TimerCache
+import com.charly.core.repositories.GetDailyWeatherForecastByIdRepositoryImpl
 import com.charly.core.repositories.GetDailyWeatherForecastListRepositoryImpl
 import com.charly.database.di.databaseModule
 import com.charly.datastore.di.datastoreModule
+import com.charly.domain.repositories.GetDailyWeatherForecastByIdRepository
 import com.charly.domain.repositories.GetDailyWeatherForecastListRepository
 import com.charly.networking.di.networkingModule
 import org.koin.dsl.module
@@ -28,6 +30,11 @@ val coreModule = module {
             timerCache = get(),
             weatherDatabaseDataSource = get(),
             weatherNetworkDataSource = get()
+        )
+    }
+    factory<GetDailyWeatherForecastByIdRepository> {
+        GetDailyWeatherForecastByIdRepositoryImpl(
+            weatherDatabaseDataSource = get()
         )
     }
 }

@@ -1,4 +1,4 @@
-package com.charly.weatherapp.extensions
+package com.charly.weatherapp.formatdata
 
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.number

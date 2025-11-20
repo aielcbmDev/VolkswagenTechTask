@@ -1,0 +1,52 @@
+package com.something.volkswagentechtask.navigation
+
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.charly.weatherapp.ui.detailscreen.DetailViewModel
+import com.charly.weatherapp.ui.mainscreen.MainScreen
+import com.charly.weatherapp.ui.mainscreen.MainViewModel
+import com.charly.weatherapp.ui.mainscreen.ViewIntent
+import org.koin.compose.viewmodel.koinViewModel
+
+@Composable
+fun WeatherNavigationHost() {
+    val navController = rememberNavController()
+    NavHost(
+        navController,
+        startDestination = Destination.Main.route,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        composable(route = Destination.Main.route) {
+            val mainViewModel = koinViewModel<MainViewModel>()
+            val mainScreenState by mainViewModel.state.collectAsStateWithLifecycle()
+            MainScreen(
+                mainScreenState = mainScreenState,
+                onDailyForecastModelClick = { id ->
+                    navController.navigate(Destination.Detail(id).route)
+                },
+                onRetryButtonClicked = { mainViewModel.handleIntent(ViewIntent.FetchDailyWeatherForecast) }
+            )
+        }
+        composable(
+            route = Destination.Detail.ROUTE_PATTERN,
+            arguments = listOf(navArgument(Destination.Detail.ARG_ITEM_ID) {
+                type = NavType.LongType
+            }),
+        ) { backStackEntry ->
+            val savedStateHandle = backStackEntry.savedStateHandle
+            // this will ALWAYS be present and not null
+            val itemId = savedStateHandle.get<Long>(Destination.Detail.ARG_ITEM_ID)!!
+            val detailViewModel = koinViewModel<DetailViewModel>(
+                parameters = { org.koin.core.parameter.parametersOf(itemId) }
+            )
+        }
+    }
+}

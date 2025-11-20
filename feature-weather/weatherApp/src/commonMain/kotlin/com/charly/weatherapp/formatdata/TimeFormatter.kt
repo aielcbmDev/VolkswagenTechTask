@@ -1,6 +1,5 @@
 package com.charly.weatherapp.formatdata
 
-import com.charly.weatherapp.extensions.formatToString
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime

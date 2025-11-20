@@ -7,14 +7,17 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface DailyDao {
+interface DailyForecastDao {
 
     @Query("SELECT * FROM daily_weather_table ORDER BY dt")
     fun getDailyWeatherForecastList(): Flow<List<DailyForecastEntity>>
 
+    @Query("SELECT * FROM daily_weather_table WHERE id = :id")
+    fun getDailyWeatherForecastById(id: Long): DailyForecastEntity
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList: List<DailyForecastEntity>)
+    fun insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList: List<DailyForecastEntity>)
 
     @Query("DELETE from daily_weather_table")
-    suspend fun deleteDailyWeatherForecastTable()
+    fun deleteDailyWeatherForecastTable()
 }

@@ -1,22 +1,26 @@
 package com.charly.database.datasources
 
-import com.charly.database.model.DailyDao
+import com.charly.database.model.DailyForecastDao
 import com.charly.database.model.DailyForecastEntity
 import kotlinx.coroutines.flow.Flow
 
 class WeatherDatabaseDataSource(
-    private val dailyDao: DailyDao
+    private val dailyForecastDao: DailyForecastDao
 ) {
 
     fun getDailyWeatherForecastList(): Flow<List<DailyForecastEntity>> {
-        return dailyDao.getDailyWeatherForecastList()
+        return dailyForecastDao.getDailyWeatherForecastList()
     }
 
-    suspend fun insertDailyWeatherForecastList(dailyForecastEntityList: List<DailyForecastEntity>) {
-        dailyDao.insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList)
+    fun getDailyWeatherForecastById(id: Long): DailyForecastEntity {
+        return dailyForecastDao.getDailyWeatherForecastById(id)
     }
 
-    suspend fun deleteDailyWeatherForecastTable() {
-        dailyDao.deleteDailyWeatherForecastTable()
+    fun insertDailyWeatherForecastList(dailyForecastEntityList: List<DailyForecastEntity>) {
+        dailyForecastDao.insertOrReplaceListOfDailyWeatherForecast(dailyForecastEntityList)
+    }
+
+    fun deleteDailyWeatherForecastTable() {
+        dailyForecastDao.deleteDailyWeatherForecastTable()
     }
 }

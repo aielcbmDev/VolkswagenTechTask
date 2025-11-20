@@ -3,6 +3,7 @@ package com.charly.weatherapp.di
 import com.charly.core.di.coreModule
 import com.charly.domain.di.domainModule
 import com.charly.weatherapp.formatdata.TimeFormatter
+import com.charly.weatherapp.ui.detailscreen.DetailViewModel
 import com.charly.weatherapp.ui.mainscreen.MainViewModel
 import kotlinx.datetime.TimeZone
 import org.koin.core.module.dsl.viewModel
@@ -16,6 +17,13 @@ val weatherAppModule = module {
     viewModel {
         MainViewModel(
             getDailyWeatherForecastListUseCase = get(),
+            timeFormatter = get()
+        )
+    }
+    viewModel {
+        DetailViewModel(
+            itemId = get(),
+            getDailyWeatherForecastByIdUseCase = get(),
             timeFormatter = get()
         )
     }
