@@ -5,19 +5,19 @@ import com.charly.core.mappers.database.mapToDailyList
 import com.charly.core.mappers.networking.mapToDailyEntityList
 import com.charly.database.datasources.WeatherDatabaseDataSource
 import com.charly.domain.model.DailyForecast
-import com.charly.domain.repositories.DailyWeatherForecastRepository
+import com.charly.domain.repositories.GetDailyWeatherForecastListRepository
 import com.charly.networking.datasource.WeatherNetworkingDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 
-class DailyWeatherForecastRepositoryImpl(
+class GetDailyWeatherForecastListRepositoryImpl(
     private val timerCache: TimerCache,
     private val weatherDatabaseDataSource: WeatherDatabaseDataSource,
     private val weatherNetworkDataSource: WeatherNetworkingDataSource
-) : DailyWeatherForecastRepository {
+) : GetDailyWeatherForecastListRepository {
 
-    override suspend fun getDailyWeatherForecastList(): Flow<List<DailyForecast>> {
+    override suspend fun execute(): Flow<List<DailyForecast>> {
         return weatherDatabaseDataSource.getDailyWeatherForecastList()
             .onStart { fetchAndSaveDailyWeatherForecast() }
             .map { it.mapToDailyList() }

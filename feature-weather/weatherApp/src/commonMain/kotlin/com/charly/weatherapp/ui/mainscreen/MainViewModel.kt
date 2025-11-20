@@ -2,7 +2,7 @@ package com.charly.weatherapp.ui.mainscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.charly.domain.usecases.DailyWeatherForecastUseCase
+import com.charly.domain.usecases.GetDailyWeatherForecastListUseCase
 import com.charly.weatherapp.formatdata.TimeFormatter
 import com.charly.weatherapp.mappers.mapToDailyForecastModelList
 import com.charly.weatherapp.model.DailyForecastModel
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val dailyWeatherForecastUseCase: DailyWeatherForecastUseCase,
+    private val getDailyWeatherForecastListUseCase: GetDailyWeatherForecastListUseCase,
     private val timeFormatter: TimeFormatter
 ) : ViewModel() {
 
@@ -42,7 +42,7 @@ class MainViewModel(
     private fun fetchDailyWeatherForecast() {
         _state.update { it.copy(uiState = UiState.Loading) }
         viewModelScope.launch(exceptionHandler) {
-            dailyWeatherForecastUseCase.getDailyWeatherForecastList()
+            getDailyWeatherForecastListUseCase.execute()
                 .map { it.mapToDailyForecastModelList(timeFormatter, "n/a") }
                 .flowOn(Dispatchers.IO)
                 .collect { dailyForecastModelList ->

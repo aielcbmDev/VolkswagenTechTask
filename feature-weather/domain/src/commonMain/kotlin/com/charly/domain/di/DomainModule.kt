@@ -1,12 +1,12 @@
 package com.charly.domain.di
 
-import com.charly.domain.usecases.DailyWeatherForecastUseCase
+import com.charly.domain.usecases.GetDailyWeatherForecastListUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
-    factory<DailyWeatherForecastUseCase> {
-        DailyWeatherForecastUseCase(
-            dailyWeatherForecastRepository = get()
+    factory<GetDailyWeatherForecastListUseCase> {
+        GetDailyWeatherForecastListUseCase(
+            getDailyWeatherForecastListRepository = get()
         )
     }
 }

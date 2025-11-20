@@ -15,7 +15,7 @@ val weatherAppModule = module {
     factory<TimeFormatter> { TimeFormatter(timeZone = get()) }
     viewModel {
         MainViewModel(
-            dailyWeatherForecastUseCase = get(),
+            getDailyWeatherForecastListUseCase = get(),
             timeFormatter = get()
         )
     }
