@@ -23,6 +23,7 @@ androidx-room = "2.8.4"                         # https://developer.android.com/
 sqlite-bundled = "2.6.2"                        # https://developer.android.com/jetpack/androidx/releases/sqlite
 datastore = "1.2.0"                             # https://developer.android.com/jetpack/androidx/releases/datastore
 kotlinDateTime = "0.7.1"                        # https://github.com/Kotlin/kotlinx-datetime/releases
+materialIcons = "1.7.3"                         # https://mvnrepository.com/artifact/org.jetbrains.compose.material/material-icons-extended
 
 [libraries]
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
@@ -55,6 +56,7 @@ androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.r
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinDateTime" }
+kotlinx-material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "materialIcons" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

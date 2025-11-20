@@ -81,6 +81,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
 
             implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.material.icons.extended)
         }
 
         commonTest.dependencies {
