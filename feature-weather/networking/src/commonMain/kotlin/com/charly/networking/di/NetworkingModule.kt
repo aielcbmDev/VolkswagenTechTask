@@ -27,7 +27,7 @@ val networkingModule = module {
     factory<WeatherApiService> {
         WeatherApiService(
             weatherApiKey = get(named(DI_WEATHER_API_KEY)),
-            weatherUnits = WeatherUnits.STANDARD,
+            weatherUnits = WeatherUnits.METRIC,
             httpClient = get()
         )
     }
