@@ -9,7 +9,7 @@ import com.charly.domain.repositories.DailyWeatherForecastRepository
 import com.charly.networking.datasource.WeatherNetworkingDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.transform
+import kotlinx.coroutines.flow.onStart
 
 class DailyWeatherForecastRepositoryImpl(
     private val timerCache: TimerCache,
@@ -19,10 +19,7 @@ class DailyWeatherForecastRepositoryImpl(
 
     override suspend fun getDailyWeatherForecastList(): Flow<List<Daily>> {
         return weatherDatabaseDataSource.getDailyWeatherForecastList()
-            .map { it.mapToDailyList() }.transform {
-                if (it.isNotEmpty()) {
-                    emit(it)
-                }
+            .onStart {
                 if (timerCache.isCacheExpired()) {
                     val dailyWeatherForecastData =
                         weatherNetworkDataSource.getDailyWeatherForecastData()
@@ -32,5 +29,6 @@ class DailyWeatherForecastRepositoryImpl(
                     weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyEntityList)
                 }
             }
+            .map { it.mapToDailyList() }
     }
 }
