@@ -39,9 +39,9 @@ data class DailyData(
     @SerialName("weather")
     val weather: ArrayList<WeatherData> = arrayListOf(),
     @SerialName("clouds")
-    val clouds: Int? = null,
+    val clouds: String? = null,
     @SerialName("pop")
-    val pop: Int? = null,
+    val pop: String? = null,
     @SerialName("uvi")
     val uvi: String? = null
 )
