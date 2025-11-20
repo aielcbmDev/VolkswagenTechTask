@@ -13,4 +13,7 @@ interface DailyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrReplaceListOfDailyWeatherForecast(dailyEntityList: List<DailyEntity>)
+
+    @Query("DELETE from daily_weather_table")
+    suspend fun deleteDailyWeatherForecastTable()
 }

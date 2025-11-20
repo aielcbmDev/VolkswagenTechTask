@@ -27,6 +27,7 @@ class DailyWeatherForecastRepositoryImpl(
                     val dailyWeatherForecastData =
                         weatherNetworkDataSource.getDailyWeatherForecastData()
                     timerCache.saveCacheTime()
+                    weatherDatabaseDataSource.deleteDailyWeatherForecastTable()
                     val dailyEntityList = dailyWeatherForecastData.mapToDailyEntityList()
                     weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyEntityList)
                 }
