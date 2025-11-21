@@ -10,9 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.charly.weatherapp.ui.detailscreen.DetailScreen
-import com.charly.weatherapp.ui.detailscreen.DetailViewIntent
-import com.charly.weatherapp.ui.detailscreen.DetailViewModel
+import com.charly.weatherapp.ui.detail.DetailViewIntent
+import com.charly.weatherapp.ui.detail.DetailViewModel
+import com.charly.weatherapp.ui.detail.screen.DetailScreen
 import com.charly.weatherapp.ui.mainscreen.MainScreen
 import com.charly.weatherapp.ui.mainscreen.MainViewIntent
 import com.charly.weatherapp.ui.mainscreen.MainViewModel

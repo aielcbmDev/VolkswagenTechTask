@@ -1,4 +1,4 @@
-package com.charly.weatherapp.ui.detailscreen
+package com.charly.weatherapp.ui.detail
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
@@ -9,8 +9,8 @@ import com.charly.weatherapp.formatdata.datetime.TimeFormatter
 import com.charly.weatherapp.formatdata.degrees.DegreesFormatter
 import com.charly.weatherapp.formatdata.speed.SpeedFormatter
 import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
-import com.charly.weatherapp.mappers.mapToDailyForecastDetailModel
-import com.charly.weatherapp.model.DailyForecastDetailModel
+import com.charly.weatherapp.ui.detail.mappers.mapToDailyForecastDetailModel
+import com.charly.weatherapp.ui.detail.model.DailyForecastDetailModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

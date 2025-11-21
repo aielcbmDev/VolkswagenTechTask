@@ -1,4 +1,4 @@
-package com.charly.weatherapp.ui.detailscreen.success
+package com.charly.weatherapp.ui.detail.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -15,9 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.charly.weatherapp.model.DailyForecastDetailModel
 import com.charly.weatherapp.ui.common.DisplayDataHorizontally
 import com.charly.weatherapp.ui.common.DisplayDataVertically
+import com.charly.weatherapp.ui.detail.model.DailyForecastDetailModel
 import org.jetbrains.compose.resources.stringResource
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.detail_screen_maximum_temperature_title

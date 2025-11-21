@@ -1,4 +1,4 @@
-package com.charly.weatherapp.mappers
+package com.charly.weatherapp.ui.detail.mappers
 
 import com.charly.domain.model.DailyForecast
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
@@ -6,7 +6,7 @@ import com.charly.weatherapp.formatdata.datetime.TimeFormatter
 import com.charly.weatherapp.formatdata.degrees.DegreesFormatter
 import com.charly.weatherapp.formatdata.speed.SpeedFormatter
 import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
-import com.charly.weatherapp.model.DailyForecastDetailModel
+import com.charly.weatherapp.ui.detail.model.DailyForecastDetailModel
 
 internal suspend fun DailyForecast.mapToDailyForecastDetailModel(
     dateFormatter: DateFormatter,
