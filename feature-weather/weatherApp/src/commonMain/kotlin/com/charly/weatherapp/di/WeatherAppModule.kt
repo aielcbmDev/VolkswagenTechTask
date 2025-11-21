@@ -5,6 +5,8 @@ import com.charly.diqualifiers.DI_WEATHER_UNITS
 import com.charly.domain.di.domainModule
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
 import com.charly.weatherapp.formatdata.datetime.TimeFormatter
+import com.charly.weatherapp.formatdata.speed.SpeedFormatter
+import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
 import com.charly.weatherapp.model.WeatherUnits
 import com.charly.weatherapp.ui.detailscreen.DetailViewModel
 import com.charly.weatherapp.ui.mainscreen.MainViewModel
@@ -21,11 +23,15 @@ val weatherAppModule = module {
     factory<TimeZone> { TimeZone.UTC }
     factory<DateFormatter> { DateFormatter(timeZone = get()) }
     factory<TimeFormatter> { TimeFormatter(timeZone = get()) }
+    factory<SpeedFormatter> { SpeedFormatter(weatherUnits = get()) }
+    factory<TemperatureFormatter> { TemperatureFormatter(weatherUnits = get()) }
     viewModel {
         MainViewModel(
             getDailyWeatherForecastListUseCase = get(),
             dateFormatter = get(),
-            timeFormatter = get()
+            timeFormatter = get(),
+            speedFormatter = get(),
+            temperatureFormatter = get()
         )
     }
     viewModel {
@@ -33,7 +39,9 @@ val weatherAppModule = module {
             itemId = get(),
             getDailyWeatherForecastByIdUseCase = get(),
             dateFormatter = get(),
-            timeFormatter = get()
+            timeFormatter = get(),
+            speedFormatter = get(),
+            temperatureFormatter = get()
         )
     }
 }

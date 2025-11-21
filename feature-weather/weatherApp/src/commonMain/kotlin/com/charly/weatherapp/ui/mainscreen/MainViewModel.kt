@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastListUseCase
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
 import com.charly.weatherapp.formatdata.datetime.TimeFormatter
+import com.charly.weatherapp.formatdata.speed.SpeedFormatter
+import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
 import com.charly.weatherapp.mappers.mapToDailyForecastModelList
 import com.charly.weatherapp.model.DailyForecastModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -24,7 +26,9 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.data_no
 class MainViewModel(
     private val getDailyWeatherForecastListUseCase: GetDailyWeatherForecastListUseCase,
     private val dateFormatter: DateFormatter,
-    private val timeFormatter: TimeFormatter
+    private val timeFormatter: TimeFormatter,
+    private val speedFormatter: SpeedFormatter,
+    private val temperatureFormatter: TemperatureFormatter
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
@@ -50,7 +54,13 @@ class MainViewModel(
             getDailyWeatherForecastListUseCase.execute()
                 .map {
                     val noDataAvailable = getString(Res.string.data_not_available_text)
-                    it.mapToDailyForecastModelList(dateFormatter, timeFormatter, noDataAvailable)
+                    it.mapToDailyForecastModelList(
+                        dateFormatter = dateFormatter,
+                        timeFormatter = timeFormatter,
+                        speedFormatter = speedFormatter,
+                        temperatureFormatter = temperatureFormatter,
+                        noDataAvailable = noDataAvailable
+                    )
                 }
                 .flowOn(Dispatchers.IO)
                 .collect { dailyForecastModelList ->

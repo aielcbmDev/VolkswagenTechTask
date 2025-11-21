@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastByIdUseCase
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
 import com.charly.weatherapp.formatdata.datetime.TimeFormatter
+import com.charly.weatherapp.formatdata.speed.SpeedFormatter
+import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
 import com.charly.weatherapp.mappers.mapToDailyForecastModel
 import com.charly.weatherapp.model.DailyForecastModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -24,7 +26,9 @@ class DetailViewModel(
     private val itemId: Long,
     private val getDailyWeatherForecastByIdUseCase: GetDailyWeatherForecastByIdUseCase,
     private val dateFormatter: DateFormatter,
-    private val timeFormatter: TimeFormatter
+    private val timeFormatter: TimeFormatter,
+    private val speedFormatter: SpeedFormatter,
+    private val temperatureFormatter: TemperatureFormatter
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
@@ -52,6 +56,8 @@ class DetailViewModel(
                     .mapToDailyForecastModel(
                         dateFormatter = dateFormatter,
                         timeFormatter = timeFormatter,
+                        speedFormatter = speedFormatter,
+                        temperatureFormatter = temperatureFormatter,
                         noDataAvailable = getString(Res.string.data_not_available_text)
                     )
             }

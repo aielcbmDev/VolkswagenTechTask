@@ -15,4 +15,12 @@
     <string name="detail_screen_minimum_temperature_title">Minimum temperature</string>
     <string name="detail_screen_maximum_temperature_title">Maximum temperature</string>
     <string name="detail_screen_summary_title">Summary</string>
+
+    <string name="standard_temperature_units">K</string>
+    <string name="metric_temperature_units">°C</string>
+    <string name="imperial_temperature_units">°F</string>
+    <string name="standard_speed_units">meter/sec</string>
+    <string name="metric_speed_units">meter/sec</string>
+    <string name="imperial_speed_units">miles/hour</string>
+
 </resources>
