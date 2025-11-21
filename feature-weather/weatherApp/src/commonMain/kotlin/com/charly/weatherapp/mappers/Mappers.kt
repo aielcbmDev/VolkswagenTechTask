@@ -20,8 +20,8 @@ internal suspend fun DailyForecast.mapToDailyForecastModel(
         sunrise = timeFormatter.formatEpochSecondsToTimeString(sunrise) ?: noDataAvailable,
         sunset = timeFormatter.formatEpochSecondsToTimeString(sunset) ?: noDataAvailable,
         summary = summary ?: noDataAvailable,
-        minTemp = minTemp?.let { temperatureFormatter.formatTemperature(it) } ?: noDataAvailable,
-        maxTemp = maxTemp?.let { temperatureFormatter.formatTemperature(it) } ?: noDataAvailable
+        minTemp = temperatureFormatter.formatTemperature(minTemp) ?: noDataAvailable,
+        maxTemp = temperatureFormatter.formatTemperature(maxTemp) ?: noDataAvailable
     )
 }
 

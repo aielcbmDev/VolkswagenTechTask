@@ -10,7 +10,8 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.standar
 class TemperatureFormatter(
     private val weatherUnits: WeatherUnits
 ) {
-    suspend fun formatTemperature(temperature: String): String {
+    suspend fun formatTemperature(temperature: String?): String? {
+        if (temperature.isNullOrEmpty()) return null
         return when (weatherUnits) {
             WeatherUnits.STANDARD -> "$temperature ${getString(Res.string.standard_temperature_units)}"
             WeatherUnits.METRIC -> "$temperature ${getString(Res.string.metric_temperature_units)}"

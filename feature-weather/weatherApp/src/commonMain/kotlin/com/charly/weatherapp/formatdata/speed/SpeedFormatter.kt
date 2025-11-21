@@ -11,7 +11,8 @@ class SpeedFormatter(
     private val weatherUnits: WeatherUnits
 ) {
 
-    suspend fun formatSpeed(speed: String): String {
+    suspend fun formatSpeed(speed: String?): String? {
+        if (speed.isNullOrEmpty()) return null
         return when (weatherUnits) {
             WeatherUnits.STANDARD -> "$speed ${getString(Res.string.standard_speed_units)}"
             WeatherUnits.METRIC -> "$speed ${getString(Res.string.metric_speed_units)}"
