@@ -46,7 +46,7 @@ class WeatherApiServiceTest {
         val weatherApiKey = "dummyApiKey"
         val weatherApiService = WeatherApiService(
             weatherApiKey = weatherApiKey,
-            weatherUnits = WeatherUnits.STANDARD,
+            weatherUnits = "standard",
             httpClient = httpClientFactory.createHttpClient()
         )
 
@@ -80,7 +80,7 @@ class WeatherApiServiceTest {
             val weatherApiKey = "dummyApiKey"
             val weatherApiService = WeatherApiService(
                 weatherApiKey = weatherApiKey,
-                weatherUnits = WeatherUnits.STANDARD,
+                weatherUnits = "standard",
                 httpClient = httpClientFactory.createHttpClient()
             )
 

@@ -7,7 +7,7 @@ import io.ktor.client.request.get
 
 class WeatherApiService(
     private val weatherApiKey: String,
-    private val weatherUnits: WeatherUnits,
+    private val weatherUnits: String,
     private val httpClient: HttpClient
 ) {
 
@@ -22,10 +22,10 @@ class WeatherApiService(
         private const val HARDCODED_LATITUDE = "40.7128"
 
         fun generateUrl(
-            weatherUnits: WeatherUnits,
+            weatherUnits: String,
             weatherApiKey: String
         ): String {
-            return "https://api.openweathermap.org/data/3.0/onecall?lat=$HARDCODED_LATITUDE&lon=$HARDCODED_LONGITUDE&units=${weatherUnits.units}&exclude=current,minutely,hourly,alerts&appid=$weatherApiKey"
+            return "https://api.openweathermap.org/data/3.0/onecall?lat=$HARDCODED_LATITUDE&lon=$HARDCODED_LONGITUDE&units=${weatherUnits}&exclude=current,minutely,hourly,alerts&appid=$weatherApiKey"
         }
     }
 }
