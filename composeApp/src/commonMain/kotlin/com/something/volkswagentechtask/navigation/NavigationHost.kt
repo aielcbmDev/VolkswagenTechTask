@@ -1,9 +1,7 @@
 package com.something.volkswagentechtask.navigation
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -23,8 +21,7 @@ fun WeatherNavigationHost() {
     val navController = rememberNavController()
     NavHost(
         navController,
-        startDestination = Destination.Main.route,
-        modifier = Modifier.fillMaxSize()
+        startDestination = Destination.Main.route
     ) {
         composable(route = Destination.Main.route) {
             val mainViewModel = koinViewModel<MainViewModel>()

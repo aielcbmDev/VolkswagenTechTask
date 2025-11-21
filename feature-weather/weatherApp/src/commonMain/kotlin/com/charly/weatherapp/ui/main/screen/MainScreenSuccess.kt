@@ -1,6 +1,7 @@
 package com.charly.weatherapp.ui.main.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -35,7 +36,8 @@ fun MainScreenSuccess(
                 title = { Text(stringResource(Res.string.main_screen_top_app_bar_title)) },
                 colors = TopAppBarDefaults.topAppBarColors(titleContentColor = Color.Red)
             )
-        }
+        },
+        modifier = Modifier.fillMaxSize()
     ) { padding ->
         val state = rememberLazyListState()
         LazyColumn(
