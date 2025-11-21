@@ -14,7 +14,7 @@ fun MainScreen(
     when (val uiState = mainScreenState.mainUiState) {
         is MainUiState.Loading -> ScreenLoading()
         is MainUiState.Success -> MainScreenSuccess(
-            dailyForecastModelList = uiState.dailyForecastModelList,
+            dailyForecastMainModelList = uiState.dailyForecastMainModelList,
             onDailyForecastModelClick = onDailyForecastModelClick
         )
 

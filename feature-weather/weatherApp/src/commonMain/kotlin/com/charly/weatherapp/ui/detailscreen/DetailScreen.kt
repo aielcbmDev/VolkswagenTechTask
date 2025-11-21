@@ -14,7 +14,7 @@ fun DetailScreen(
     when (val detailUiState = detailScreenState.detailUiState) {
         is DetailUiState.Loading -> ScreenLoading()
         is DetailUiState.Success -> DetailScreenSuccess(
-            dailyForecastModel = detailUiState.dailyForecastModel,
+            dailyForecastDetailModel = detailUiState.dailyForecastDetailModel,
             onBackButtonClicked = onBackButtonClicked
         )
 

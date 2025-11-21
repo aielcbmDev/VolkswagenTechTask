@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.charly.weatherapp.model.DailyForecastModel
+import com.charly.weatherapp.model.DailyForecastDetailModel
 import com.charly.weatherapp.ui.common.DisplayDataHorizontally
 import com.charly.weatherapp.ui.common.DisplayDataVertically
 import org.jetbrains.compose.resources.stringResource
@@ -25,17 +25,20 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.detail_
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.detail_screen_summary_title
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.detail_screen_sunrise_title
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.detail_screen_sunset_title
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.detail_screen_wind_direction_title
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.detail_screen_wind_gust_title
+import volkswagentechtask.feature_weather.weatherapp.generated.resources.detail_screen_wind_speed_title
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreenSuccess(
-    dailyForecastModel: DailyForecastModel,
+    dailyForecastDetailModel: DailyForecastDetailModel,
     onBackButtonClicked: () -> Unit
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(dailyForecastModel.dt) },
+                title = { Text(dailyForecastDetailModel.dt) },
                 colors = TopAppBarDefaults.topAppBarColors(titleContentColor = Color.Red),
                 navigationIcon = {
                     IconButton(onClick = { onBackButtonClicked.invoke() }) {
@@ -51,23 +54,35 @@ fun DetailScreenSuccess(
         ) {
             DisplayDataHorizontally(
                 stringResource(Res.string.detail_screen_sunrise_title),
-                dailyForecastModel.sunrise
+                dailyForecastDetailModel.sunrise
             )
             DisplayDataHorizontally(
                 stringResource(Res.string.detail_screen_sunset_title),
-                dailyForecastModel.sunset
+                dailyForecastDetailModel.sunset
             )
             DisplayDataHorizontally(
                 stringResource(Res.string.detail_screen_minimum_temperature_title),
-                dailyForecastModel.minTemp
+                dailyForecastDetailModel.minTemp
             )
             DisplayDataHorizontally(
                 stringResource(Res.string.detail_screen_maximum_temperature_title),
-                dailyForecastModel.maxTemp
+                dailyForecastDetailModel.maxTemp
+            )
+            DisplayDataHorizontally(
+                stringResource(Res.string.detail_screen_wind_speed_title),
+                dailyForecastDetailModel.windSpeed
+            )
+            DisplayDataHorizontally(
+                stringResource(Res.string.detail_screen_wind_gust_title),
+                dailyForecastDetailModel.windGust
+            )
+            DisplayDataHorizontally(
+                stringResource(Res.string.detail_screen_wind_direction_title),
+                dailyForecastDetailModel.windDeg
             )
             DisplayDataVertically(
                 stringResource(Res.string.detail_screen_summary_title),
-                dailyForecastModel.summary
+                dailyForecastDetailModel.summary
             )
         }
     }

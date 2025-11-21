@@ -7,5 +7,8 @@ data class DailyForecast(
     val sunset: Long? = null,
     val summary: String? = null,
     val minTemp: String? = null,
-    val maxTemp: String? = null
+    val maxTemp: String? = null,
+    val windSpeed: String? = null,
+    val windDeg: String? = null,
+    val windGust: String? = null
 )

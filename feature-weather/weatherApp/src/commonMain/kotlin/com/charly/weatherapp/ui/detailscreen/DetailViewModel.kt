@@ -6,10 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastByIdUseCase
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
 import com.charly.weatherapp.formatdata.datetime.TimeFormatter
+import com.charly.weatherapp.formatdata.degrees.DegreesFormatter
 import com.charly.weatherapp.formatdata.speed.SpeedFormatter
 import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
-import com.charly.weatherapp.mappers.mapToDailyForecastModel
-import com.charly.weatherapp.model.DailyForecastModel
+import com.charly.weatherapp.mappers.mapToDailyForecastDetailModel
+import com.charly.weatherapp.model.DailyForecastDetailModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -29,7 +30,8 @@ class DetailViewModel(
     private val dateFormatter: DateFormatter,
     private val timeFormatter: TimeFormatter,
     private val speedFormatter: SpeedFormatter,
-    private val temperatureFormatter: TemperatureFormatter
+    private val temperatureFormatter: TemperatureFormatter,
+    private val degreesFormatter: DegreesFormatter
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
@@ -54,16 +56,17 @@ class DetailViewModel(
         viewModelScope.launch(exceptionHandler) {
             val dailyForecastModel = withContext(Dispatchers.IO) {
                 getDailyWeatherForecastByIdUseCase.execute(itemId)
-                    .mapToDailyForecastModel(
+                    .mapToDailyForecastDetailModel(
                         dateFormatter = dateFormatter,
                         timeFormatter = timeFormatter,
                         speedFormatter = speedFormatter,
                         temperatureFormatter = temperatureFormatter,
+                        degreesFormatter = degreesFormatter,
                         noDataAvailable = getString(Res.string.data_not_available_text)
                     )
             }
             _state.update {
-                it.copy(detailUiState = DetailUiState.Success(dailyForecastModel = dailyForecastModel))
+                it.copy(detailUiState = DetailUiState.Success(dailyForecastDetailModel = dailyForecastModel))
             }
         }
     }
@@ -77,7 +80,7 @@ data class DetailScreenState(
 @Immutable
 sealed interface DetailUiState {
     data class Success(
-        val dailyForecastModel: DailyForecastModel,
+        val dailyForecastDetailModel: DailyForecastDetailModel,
     ) : DetailUiState
 
     object Loading : DetailUiState

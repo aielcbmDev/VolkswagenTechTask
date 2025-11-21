@@ -4,17 +4,6 @@ import com.charly.database.model.DailyForecastEntity
 import com.charly.networking.model.DailyForecastData
 import com.charly.networking.model.DailyForecastWeatherData
 
-private fun DailyForecastData.mapToDailyForecastEntity(): DailyForecastEntity {
-    return DailyForecastEntity(
-        dt = dt,
-        sunrise = sunrise,
-        sunset = sunset,
-        summary = summary,
-        minTemp = temp?.min,
-        maxTemp = temp?.max
-    )
-}
-
 /**
  * This function is responsible for mapping the incoming DailyForecastWeatherData from the network
  * module to a list of DailyEntity objects for the database module.
@@ -25,6 +14,20 @@ private fun DailyForecastData.mapToDailyForecastEntity(): DailyForecastEntity {
  * production environment, this mapping would be expanded to include more fields, leading to a more
  * comprehensive data model and, consequently, a more complex database schema.
  */
+private fun DailyForecastData.mapToDailyForecastEntity(): DailyForecastEntity {
+    return DailyForecastEntity(
+        dt = dt,
+        sunrise = sunrise,
+        sunset = sunset,
+        summary = summary,
+        minTemp = temp?.min,
+        maxTemp = temp?.max,
+        windSpeed = windSpeed,
+        windDeg = windDeg,
+        windGust = windGust
+    )
+}
+
 internal fun DailyForecastWeatherData.mapToDailyForecastEntityList(): List<DailyForecastEntity> {
     return this.daily.map { it.mapToDailyForecastEntity() }
 }

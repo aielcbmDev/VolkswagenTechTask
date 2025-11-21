@@ -5,11 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastListUseCase
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
-import com.charly.weatherapp.formatdata.datetime.TimeFormatter
-import com.charly.weatherapp.formatdata.speed.SpeedFormatter
-import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
-import com.charly.weatherapp.mappers.mapToDailyForecastModelList
-import com.charly.weatherapp.model.DailyForecastModel
+import com.charly.weatherapp.mappers.mapToDailyForecastMainModelList
+import com.charly.weatherapp.model.DailyForecastMainModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -26,10 +23,7 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.data_no
 
 class MainViewModel(
     private val getDailyWeatherForecastListUseCase: GetDailyWeatherForecastListUseCase,
-    private val dateFormatter: DateFormatter,
-    private val timeFormatter: TimeFormatter,
-    private val speedFormatter: SpeedFormatter,
-    private val temperatureFormatter: TemperatureFormatter
+    private val dateFormatter: DateFormatter
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
@@ -55,17 +49,13 @@ class MainViewModel(
             getDailyWeatherForecastListUseCase.execute()
                 .map {
                     val noDataAvailable = getString(Res.string.data_not_available_text)
-                    it.mapToDailyForecastModelList(
-                        dateFormatter = dateFormatter,
-                        timeFormatter = timeFormatter,
-                        speedFormatter = speedFormatter,
-                        temperatureFormatter = temperatureFormatter,
-                        noDataAvailable = noDataAvailable
-                    )
+                    it.mapToDailyForecastMainModelList(dateFormatter, noDataAvailable)
                 }
                 .flowOn(Dispatchers.IO)
-                .collect { dailyForecastModelList ->
-                    _state.update { it.copy(mainUiState = MainUiState.Success(dailyForecastModelList = dailyForecastModelList)) }
+                .collect { dailyForecastMainModelList ->
+                    _state.update {
+                        it.copy(mainUiState = MainUiState.Success(dailyForecastMainModelList = dailyForecastMainModelList))
+                    }
                 }
         }
     }
@@ -79,7 +69,7 @@ data class MainScreenState(
 @Immutable
 sealed interface MainUiState {
     data class Success(
-        val dailyForecastModelList: List<DailyForecastModel>,
+        val dailyForecastMainModelList: List<DailyForecastMainModel>,
     ) : MainUiState
 
     object Loading : MainUiState

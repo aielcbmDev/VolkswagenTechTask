@@ -11,7 +11,10 @@ internal fun DailyForecastEntity.mapToDailyForecast(): DailyForecast {
         sunset = sunset,
         summary = summary,
         minTemp = minTemp,
-        maxTemp = maxTemp
+        maxTemp = maxTemp,
+        windSpeed = windSpeed,
+        windDeg = windDeg,
+        windGust = windGust
     )
 }
 

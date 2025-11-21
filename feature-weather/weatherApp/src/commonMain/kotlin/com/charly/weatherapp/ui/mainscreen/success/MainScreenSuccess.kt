@@ -18,7 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.charly.weatherapp.model.DailyForecastModel
+import com.charly.weatherapp.model.DailyForecastMainModel
 import org.jetbrains.compose.resources.stringResource
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_screen_top_app_bar_title
@@ -26,7 +26,7 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_sc
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenSuccess(
-    dailyForecastModelList: List<DailyForecastModel>,
+    dailyForecastMainModelList: List<DailyForecastMainModel>,
     onDailyForecastModelClick: (Long) -> Unit,
 ) {
     Scaffold(
@@ -43,11 +43,11 @@ fun MainScreenSuccess(
             modifier = Modifier.padding(padding)
         ) {
             items(
-                items = dailyForecastModelList,
+                items = dailyForecastMainModelList,
                 key = { item -> item.id }
-            ) { dailyForecastModel ->
+            ) { dailyForecastMainModel ->
                 DailyItem(
-                    dailyForecastModel = dailyForecastModel,
+                    dailyForecastMainModel = dailyForecastMainModel,
                     onDailyForecastModelClick = onDailyForecastModelClick
                 )
             }
@@ -57,12 +57,12 @@ fun MainScreenSuccess(
 
 @Composable
 fun DailyItem(
-    dailyForecastModel: DailyForecastModel,
+    dailyForecastMainModel: DailyForecastMainModel,
     onDailyForecastModelClick: (Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
-        onClick = { onDailyForecastModelClick.invoke(dailyForecastModel.id) },
+        onClick = { onDailyForecastModelClick.invoke(dailyForecastMainModel.id) },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column(
@@ -71,14 +71,14 @@ fun DailyItem(
                 .padding(horizontal = 20.dp)
         ) {
             Text(
-                text = dailyForecastModel.dt,
+                text = dailyForecastMainModel.dt,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.outline,
                 modifier = modifier.padding(top = 12.dp, bottom = 8.dp),
             )
 
             Text(
-                text = dailyForecastModel.summary,
+                text = dailyForecastMainModel.summary,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

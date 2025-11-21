@@ -11,6 +11,9 @@ import androidx.room.PrimaryKey
 //      summary TEXT,
 //      minTemp TEXT,
 //      maxTemp TEXT
+//      windSpeed TEXT
+//      windDeg TEXT
+//      windGust TEXT
 //  );
 @Entity(
     tableName = "daily_weather_table"
@@ -23,5 +26,8 @@ data class DailyForecastEntity(
     val sunset: Long? = null,
     val summary: String? = null,
     val minTemp: String? = null,
-    val maxTemp: String? = null
+    val maxTemp: String? = null,
+    val windSpeed: String? = null,
+    val windDeg: String? = null,
+    val windGust: String? = null
 )

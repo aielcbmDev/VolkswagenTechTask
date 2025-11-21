@@ -14,8 +14,14 @@
     <string name="detail_screen_sunset_title">Sunset</string>
     <string name="detail_screen_minimum_temperature_title">Minimum temperature</string>
     <string name="detail_screen_maximum_temperature_title">Maximum temperature</string>
+    <string name="detail_screen_wind_speed_title">Wind speed</string>
+    <string name="detail_screen_wind_gust_title">Wind gust</string>
+    <string name="detail_screen_wind_direction_title">Wind direction</string>
     <string name="detail_screen_summary_title">Summary</string>
 
+    <string name="display_data_with_units_text">%1$s%2$s</string>
+
+    <string name="degrees_units">°</string>
     <string name="standard_temperature_units">K</string>
     <string name="metric_temperature_units">°C</string>
     <string name="imperial_temperature_units">°F</string>
