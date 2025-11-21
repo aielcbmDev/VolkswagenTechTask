@@ -1,8 +1,10 @@
 package com.charly.weatherapp.di
 
 import com.charly.core.di.coreModule
+import com.charly.diqualifiers.DI_WEATHER_CACHE_TIME_IN_MILLIS
 import com.charly.diqualifiers.DI_WEATHER_UNITS
 import com.charly.domain.di.domainModule
+import com.charly.weatherapp.configuration.WeatherConfigurations
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
 import com.charly.weatherapp.formatdata.datetime.TimeFormatter
 import com.charly.weatherapp.formatdata.degrees.DegreesFormatter
@@ -19,7 +21,10 @@ import org.koin.dsl.module
 val weatherAppModule = module {
     includes(domainModule)
     includes(coreModule)
-    single<WeatherUnits> { WeatherUnits.METRIC }
+    single(named(DI_WEATHER_CACHE_TIME_IN_MILLIS)) {
+        WeatherConfigurations.WEATHER_CACHE_TIME_IN_MILLIS
+    }
+    single<WeatherUnits> { WeatherConfigurations.weatherUnits }
     single<String>(named(DI_WEATHER_UNITS)) { get<WeatherUnits>().units }
     factory<TimeZone> { TimeZone.UTC }
     factory<DateFormatter> { DateFormatter(timeZone = get()) }

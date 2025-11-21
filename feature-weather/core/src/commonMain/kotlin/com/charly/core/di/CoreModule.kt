@@ -5,9 +5,11 @@ import com.charly.core.repositories.GetDailyWeatherForecastByIdRepositoryImpl
 import com.charly.core.repositories.GetDailyWeatherForecastListRepositoryImpl
 import com.charly.database.di.databaseModule
 import com.charly.datastore.di.datastoreModule
+import com.charly.diqualifiers.DI_WEATHER_CACHE_TIME_IN_MILLIS
 import com.charly.domain.repositories.GetDailyWeatherForecastByIdRepository
 import com.charly.domain.repositories.GetDailyWeatherForecastListRepository
 import com.charly.networking.di.networkingModule
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -22,6 +24,7 @@ val coreModule = module {
     factory<TimerCache> {
         TimerCache(
             clock = get(),
+            cacheTimeInMillis = get(named(DI_WEATHER_CACHE_TIME_IN_MILLIS)),
             datastoreDataSource = get()
         )
     }
