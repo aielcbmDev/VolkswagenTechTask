@@ -13,9 +13,9 @@ import androidx.navigation.navArgument
 import com.charly.weatherapp.ui.detail.DetailViewIntent
 import com.charly.weatherapp.ui.detail.DetailViewModel
 import com.charly.weatherapp.ui.detail.screen.DetailScreen
-import com.charly.weatherapp.ui.mainscreen.MainScreen
-import com.charly.weatherapp.ui.mainscreen.MainViewIntent
-import com.charly.weatherapp.ui.mainscreen.MainViewModel
+import com.charly.weatherapp.ui.main.MainViewIntent
+import com.charly.weatherapp.ui.main.MainViewModel
+import com.charly.weatherapp.ui.main.screen.MainScreen
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

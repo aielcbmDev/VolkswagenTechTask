@@ -10,7 +10,7 @@ import com.charly.weatherapp.formatdata.speed.SpeedFormatter
 import com.charly.weatherapp.formatdata.temperature.TemperatureFormatter
 import com.charly.weatherapp.model.WeatherUnits
 import com.charly.weatherapp.ui.detail.DetailViewModel
-import com.charly.weatherapp.ui.mainscreen.MainViewModel
+import com.charly.weatherapp.ui.main.MainViewModel
 import kotlinx.datetime.TimeZone
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.qualifier.named

@@ -1,4 +1,4 @@
-package com.charly.weatherapp.model
+package com.charly.weatherapp.ui.main.model
 
 import androidx.compose.runtime.Immutable
 

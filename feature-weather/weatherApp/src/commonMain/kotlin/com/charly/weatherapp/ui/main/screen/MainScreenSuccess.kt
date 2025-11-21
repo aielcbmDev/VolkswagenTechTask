@@ -1,4 +1,4 @@
-package com.charly.weatherapp.ui.mainscreen.success
+package com.charly.weatherapp.ui.main.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,7 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.charly.weatherapp.model.DailyForecastMainModel
+import com.charly.weatherapp.ui.main.model.DailyForecastMainModel
 import org.jetbrains.compose.resources.stringResource
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.main_screen_top_app_bar_title

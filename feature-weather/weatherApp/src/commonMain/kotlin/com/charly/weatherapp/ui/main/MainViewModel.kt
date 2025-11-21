@@ -1,12 +1,12 @@
-package com.charly.weatherapp.ui.mainscreen
+package com.charly.weatherapp.ui.main
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.charly.domain.usecases.GetDailyWeatherForecastListUseCase
 import com.charly.weatherapp.formatdata.datetime.DateFormatter
-import com.charly.weatherapp.mappers.mapToDailyForecastMainModelList
-import com.charly.weatherapp.model.DailyForecastMainModel
+import com.charly.weatherapp.ui.main.mappers.mapToDailyForecastMainModelList
+import com.charly.weatherapp.ui.main.model.DailyForecastMainModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO

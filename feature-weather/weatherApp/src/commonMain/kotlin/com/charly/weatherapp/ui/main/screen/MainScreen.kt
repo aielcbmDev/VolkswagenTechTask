@@ -1,9 +1,10 @@
-package com.charly.weatherapp.ui.mainscreen
+package com.charly.weatherapp.ui.main.screen
 
 import androidx.compose.runtime.Composable
 import com.charly.weatherapp.ui.common.error.ScreenError
 import com.charly.weatherapp.ui.common.loading.ScreenLoading
-import com.charly.weatherapp.ui.mainscreen.success.MainScreenSuccess
+import com.charly.weatherapp.ui.main.MainScreenState
+import com.charly.weatherapp.ui.main.MainUiState
 
 @Composable
 fun MainScreen(
