@@ -69,7 +69,6 @@ kotlin {
             implementation(project(":di-qualifiers"))
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
 
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.client.core)
