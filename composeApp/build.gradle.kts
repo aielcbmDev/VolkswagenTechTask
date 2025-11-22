@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.secrets.gradle.plugin)
+    alias(libs.plugins.composeHotReload)
 }
 
 kotlin {

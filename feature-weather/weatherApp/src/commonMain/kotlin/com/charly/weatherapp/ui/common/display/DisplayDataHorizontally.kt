@@ -1,4 +1,4 @@
-package com.charly.weatherapp.ui.common
+package com.charly.weatherapp.ui.common.display
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

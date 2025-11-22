@@ -16,8 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.charly.weatherapp.ui.common.DisplayDataHorizontally
-import com.charly.weatherapp.ui.common.DisplayDataVertically
+import com.charly.weatherapp.ui.common.display.DisplayDataHorizontally
+import com.charly.weatherapp.ui.common.display.DisplayDataVertically
 import com.charly.weatherapp.ui.detail.model.DailyForecastDetailModel
 import org.jetbrains.compose.resources.stringResource
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res

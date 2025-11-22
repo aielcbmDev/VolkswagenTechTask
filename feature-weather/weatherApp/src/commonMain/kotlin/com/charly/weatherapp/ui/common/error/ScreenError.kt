@@ -12,7 +12,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.stringResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.Res
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.any_error
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.error_fix_suggestion
@@ -50,14 +49,4 @@ fun ScreenError(
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun MainScreenErrorPreview(
-    onRetryButtonClicked: () -> Unit = {}
-) {
-    ScreenError(
-        onRetryButtonClicked = onRetryButtonClicked
-    )
 }
