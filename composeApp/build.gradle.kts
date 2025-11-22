@@ -68,7 +68,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        val apiKey = project.findProperty("WEATHER_API_KEY") ?: ""
+        val apiKey = project.findProperty("WEATHER_API_KEY") ?: "\"DEFAULT_API_KEY\""
         buildConfigField("String", "WEATHER_API_KEY", "$apiKey")
     }
     buildFeatures {
