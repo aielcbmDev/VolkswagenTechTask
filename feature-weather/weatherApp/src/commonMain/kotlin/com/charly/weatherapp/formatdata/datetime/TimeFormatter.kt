@@ -1,11 +1,13 @@
 package com.charly.weatherapp.formatdata.datetime
 
+import com.charly.weatherapp.OpenClassForMocking
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
+@OpenClassForMocking
 class TimeFormatter(
     private val timeZone: TimeZone
 ) {

@@ -49,7 +49,8 @@ val weatherAppModule = module {
             timeFormatter = get(),
             speedFormatter = get(),
             temperatureFormatter = get(),
-            degreesFormatter = get()
+            degreesFormatter = get(),
+            stringProvider = get()
         )
     }
 }

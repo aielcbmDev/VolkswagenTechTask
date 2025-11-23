@@ -1,5 +1,6 @@
 package com.charly.weatherapp.formatdata.temperature
 
+import com.charly.weatherapp.OpenClassForMocking
 import com.charly.weatherapp.model.WeatherUnits
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
@@ -9,6 +10,7 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.imperia
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.metric_temperature_units
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.standard_temperature_units
 
+@OpenClassForMocking
 class TemperatureFormatter(
     private val weatherUnits: WeatherUnits
 ) {

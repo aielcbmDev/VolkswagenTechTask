@@ -1,5 +1,6 @@
 package com.charly.weatherapp.formatdata.speed
 
+import com.charly.weatherapp.OpenClassForMocking
 import com.charly.weatherapp.model.WeatherUnits
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
@@ -9,6 +10,7 @@ import volkswagentechtask.feature_weather.weatherapp.generated.resources.imperia
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.metric_speed_units
 import volkswagentechtask.feature_weather.weatherapp.generated.resources.standard_speed_units
 
+@OpenClassForMocking
 class SpeedFormatter(
     private val weatherUnits: WeatherUnits
 ) {
