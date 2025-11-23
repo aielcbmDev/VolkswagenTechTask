@@ -4,16 +4,6 @@ import com.charly.database.model.DailyForecastEntity
 import com.charly.networking.model.DailyForecastData
 import com.charly.networking.model.DailyForecastWeatherData
 
-/**
- * This function is responsible for mapping the incoming DailyForecastWeatherData from the network
- * module to a list of DailyEntity objects for the database module.
- *
- * This mapping stage determines which data fields are persisted and used within the app, and which
- * are discarded. For the purpose of this task, only a few key parameters are mapped to maintain
- * simplicity. This has the direct benefit of simplifying the database implementation. In a
- * production environment, this mapping would be expanded to include more fields, leading to a more
- * comprehensive data model and, consequently, a more complex database schema.
- */
 private fun DailyForecastData.mapToDailyForecastEntity(): DailyForecastEntity {
     return DailyForecastEntity(
         dt = dt,
@@ -28,6 +18,16 @@ private fun DailyForecastData.mapToDailyForecastEntity(): DailyForecastEntity {
     )
 }
 
+/**
+ * This function is responsible for mapping the incoming DailyForecastWeatherData from the network
+ * module to a list of DailyEntity objects for the database module.
+ *
+ * This mapping stage determines which data fields are persisted and used within the app, and which
+ * are discarded. For the purpose of this task, only a few key parameters are mapped to maintain
+ * simplicity. This has the direct benefit of simplifying the database implementation. In a
+ * production environment, this mapping would be expanded to include more fields, leading to a more
+ * comprehensive data model and, consequently, a more complex database schema.
+ */
 internal fun DailyForecastWeatherData.mapToDailyForecastEntityList(): List<DailyForecastEntity> {
     return this.daily.map { it.mapToDailyForecastEntity() }
 }
