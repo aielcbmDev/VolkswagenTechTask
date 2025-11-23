@@ -38,6 +38,10 @@ class WeatherDatabaseDataSourceTest {
 
         // THEN
         assertSame(expectedResult, result)
+        verifySuspend(mode = VerifyMode.exhaustiveOrder) {
+            @Suppress("UnusedFlow")
+            dailyForecastDao.getDailyWeatherForecastList()
+        }
     }
 
     @Test
@@ -56,6 +60,9 @@ class WeatherDatabaseDataSourceTest {
 
         // THEN
         assertSame(expectedResult, result)
+        verifySuspend(mode = VerifyMode.exhaustiveOrder) {
+            dailyForecastDao.getDailyWeatherForecastById(id)
+        }
     }
 
     @Test
