@@ -42,7 +42,7 @@ class WeatherDatabaseDataSourceAndroidTest {
     }
 
     @Test
-    fun verify_datastore_data_is_saved_and_retrieved_successfully() = runTest {
+    fun verify_that_daily_weather_database_data_is_saved_and_retrieved_successfully() = runTest {
         // GIVEN
         val dailyForecastEntityList =
             Json.decodeFromString<List<DailyForecastEntity>>(DAILY_WEATHER_FORECAST_LIST)

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLint)
     alias(libs.plugins.mokkeryPlugin)
     alias(libs.plugins.kotlinAllOpen)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -73,6 +74,7 @@ kotlin {
 
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.compose)
+            implementation(libs.ktor.serialization.kotlinx.json)
         }
 
         commonTest.dependencies {

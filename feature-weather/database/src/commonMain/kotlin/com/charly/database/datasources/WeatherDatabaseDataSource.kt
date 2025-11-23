@@ -1,9 +1,11 @@
 package com.charly.database.datasources
 
+import com.charly.database.OpenClassForMocking
 import com.charly.database.model.DailyForecastDao
 import com.charly.database.model.DailyForecastEntity
 import kotlinx.coroutines.flow.Flow
 
+@OpenClassForMocking
 class WeatherDatabaseDataSource(
     private val dailyForecastDao: DailyForecastDao
 ) {

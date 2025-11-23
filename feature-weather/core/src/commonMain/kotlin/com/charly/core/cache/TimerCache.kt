@@ -2,6 +2,7 @@
 
 package com.charly.core.cache
 
+import com.charly.core.OpenClassForMocking
 import com.charly.datastore.datasource.DatastoreDataSource
 import kotlinx.coroutines.flow.first
 import kotlin.time.Clock
@@ -12,6 +13,7 @@ import kotlin.time.Instant
 private const val CACHE_KEY = "CACHE_KEY"
 private const val DEFAULT_CACHE_TIME_IN_MILLIS = 3600000L // 1 hour
 
+@OpenClassForMocking
 class TimerCache(
     private val clock: Clock,
     private val cacheTimeInMillis: Long = DEFAULT_CACHE_TIME_IN_MILLIS,
