@@ -50,10 +50,10 @@ for both Android and iOS outweighs the added architectural complexity.
 It is important to note two specific trade-offs resulting from the multiplatform architecture and
 the modularization of features:
 
-- UI Testing: Testing the Compose Multiplatform UI is not currently implemented, as the
+- **UI Testing**: Testing the Compose Multiplatform UI is not currently implemented, as the
   configuration requires an androidTarget which the feature modules do not have.
 
-- Jetpack Compose Previews: The standard implementation of Compose Previews via debugImplementation(
+- **Jetpack Compose Previews**: The standard implementation of Compose Previews via debugImplementation(
   compose.uiTooling) is not possible on a per-module basis.
 
 An attempt was made to centralize previews in the composeApp module. While this was partially
@@ -74,18 +74,18 @@ The primary purpose of structuring the project into feature modules is to suppor
 development in a large codebase. This approach allows different teams to work independently on their
 respective modules, leading to significant benefits:
 
-- Faster Build Times: Gradle can cache unchanged modules, speeding up the overall build process.
+- **Faster Build Times**: Gradle can cache unchanged modules, speeding up the overall build process.
 
-- Reduced Merge Conflicts: Teams working in isolated modules are less likely to create conflicting
+- **Reduced Merge Conflicts**: Teams working in isolated modules are less likely to create conflicting
   code changes.
 
-- Improved Modularity: Each feature is self-contained, making the codebase easier to understand and
+- **Improved Modularity**: Each feature is self-contained, making the codebase easier to understand and
   maintain.
 
-- Simplified Testing: Isolating features allows for more focused and straightforward unit and
+- **Simplified Testing**: Isolating features allows for more focused and straightforward unit and
   integration testing.
 
-- Decoupled Dependencies: Changes to dependencies or API configurations within one module do not
+- **Decoupled Dependencies**: Changes to dependencies or API configurations within one module do not
   affect others, ensuring stability across the application.
 
 ### database (Android/iOS)
@@ -210,13 +210,13 @@ graph in the common code for both Android and iOS is essential for a true KMP ar
 While the current implementation provides a solid architectural foundation, the following items are
 key priorities for the continued development of this project:
 
-- UI Theming and Dimensions: Refine and standardize dimensions, colors, and typography across the
+- **UI Theming and Dimensions**: Refine and standardize dimensions, colors, and typography across the
   application to create a more polished user interface. Sorry for not handling dimensions and
   theming properly but I prioritized other aspects of this technical task.
-- Graceful Error Handling: Improve the user experience during network failures. Instead of showing
+- **Graceful Error Handling**: Improve the user experience during network failures. Instead of showing
   an error screen, the plan is to continue displaying stale data from the cache while notifying the
   user with a non-intrusive snackbar that the data may not be up-to-date.
-- Pull-to-Refresh: Implement a pull-to-refresh mechanism to give users manual control over data
+- **Pull-to-Refresh**: Implement a pull-to-refresh mechanism to give users manual control over data
   fetching, allowing them to force an update even if the cache is still valid.
-- Expanded Unit Test Coverage: Increase test coverage by adding comprehensive unit tests for all
+- **Expanded Unit Test Coverage**: Increase test coverage by adding comprehensive unit tests for all
   mappers and data formatters throughout the application.
