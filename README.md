@@ -50,7 +50,7 @@ To add your own API keys to this project you have to do the following depending 
 
 **iOS**
 
-1. Create a file named `Secrets.xcconfig` in [this](./iosApp/iosApp/Configuration) folder.
+1. Create a file named `Secrets.xcconfig` in [this](./iosApp/Configuration) folder.
 2. Inside this file, define the key as a property -> WEATHER_API_KEY="YOUR_API_KEY_HERE"
 3. A visual guide can be found [here](./iOSApiKeys.png).
 
