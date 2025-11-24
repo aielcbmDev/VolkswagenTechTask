@@ -42,10 +42,17 @@ in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and r
 
 To add your own API keys to this project you have to do the following depending on the platform.
 
-- **Android**: Create a file called `secret.properties` and add your API key. Please, have a look a
-  the following [screenshot](./androidApiKeys.png)
-- **iOS**: Create a file called `Secrets.xxconfig` and add your API key. Please, have a look a
-  the following [screenshot](./iOSApiKeys.png)
+**Android**
+
+1. Create a file named `secret.properties` in the root folder of the project.
+2. Inside this file, define the key as a property -> WEATHER_API_KEY="YOUR_API_KEY_HERE"
+3. A visual guide can be found [here](./androidApiKeys.png).
+
+**iOS**
+
+1. Create a file named `Secrets.xcconfig` in [this](./iosApp/iosApp/Configuration) folder.
+2. Inside this file, define the key as a property -> WEATHER_API_KEY="YOUR_API_KEY_HERE"
+3. A visual guide can be found [here](./iOSApiKeys.png).
 
 ## Project Architecture
 
