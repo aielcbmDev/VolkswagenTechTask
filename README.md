@@ -257,10 +257,5 @@ key priorities for the continued development of this project:
 - **UI Theming and Dimensions**: Refine and standardize dimensions, colors, and typography across
   the application to create a more polished user interface. Sorry for not handling dimensions and
   theming properly but I prioritized other aspects of this technical task.
-- **Graceful Error Handling**: Improve the user experience during network failures. Instead of
-  showing an error screen, the plan is to continue displaying stale data from the cache while
-  notifying the user with a non-intrusive snackbar that the data may not be up-to-date.
-- **Pull-to-Refresh**: Implement a pull-to-refresh mechanism to give users manual control over data
-  fetching, allowing them to force an update even if the cache is still valid.
 - **Expanded Unit Test Coverage**: Increase test coverage by adding comprehensive unit tests for all
   mappers and data formatters throughout the application.
