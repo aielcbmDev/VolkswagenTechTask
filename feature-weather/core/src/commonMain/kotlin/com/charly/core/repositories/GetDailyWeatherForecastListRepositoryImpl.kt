@@ -20,9 +20,7 @@ class GetDailyWeatherForecastListRepositoryImpl(
     private var isCacheInvalid = false
 
     override suspend fun execute(invalidateCache: Boolean): Flow<List<DailyForecast>> {
-        if (invalidateCache) {
-            this.isCacheInvalid = true
-        }
+        this.isCacheInvalid = invalidateCache
         return weatherDatabaseDataSource.getDailyWeatherForecastList()
             .map { it.mapToDailyForecastList() }
             .transform {
