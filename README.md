@@ -181,7 +181,8 @@ The main differences between MVI and MVVM are the following:
 4. Reducer → MVI has a “reducer” function that receives an Intent from the UI and,
    based on the event received and the current UiState, generates an new UiState
    state = reducer(intent, state)
-5. Error Handling → MVI usually models errors explicitly in
+5. Error Handling → MVI usually models errors explicitly in the UiState. MVVM error handling is
+   often mixed into LiveData and StateFlows.
 
 ### composeAPP
 
