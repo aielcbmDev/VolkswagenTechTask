@@ -30,6 +30,7 @@ class GetDailyWeatherForecastListRepositoryImplTest {
     @Test
     fun `Verify data is fetched from the database only if the cache is not expired`() = runTest {
         // GIVEN
+        val invalidateCache = false
         val timerCache = mock<TimerCache> {
             everySuspend { isCacheExpired() } returns false
         }
@@ -46,7 +47,7 @@ class GetDailyWeatherForecastListRepositoryImplTest {
         )
 
         // WHEN
-        val result = getDailyWeatherForecastListRepository.execute(false).toList().first()
+        val result = getDailyWeatherForecastListRepository.execute(invalidateCache).toList().first()
 
         // THEN
         val expectedResult = dailyForecastEntityList.mapToDailyForecastList()
@@ -59,9 +60,56 @@ class GetDailyWeatherForecastListRepositoryImplTest {
     }
 
     @Test
+    fun `Verify data is fetched from the database if invalidateCache is true even if the cache is not expired`() =
+        runTest {
+            // GIVEN
+            val invalidateCache = true
+            val dailyForecastEntityList =
+                Json.decodeFromString<List<DailyForecastEntity>>(DAILY_FORECAST_ENTITY_LIST)
+            val dailyForecastWeatherData =
+                Json.decodeFromString<DailyForecastWeatherData>(DAILY_FORECAST_WEATHER_DATA)
+            val timerCache = mock<TimerCache> {
+                everySuspend { isCacheExpired() } returns false
+                everySuspend { saveCacheTime() } returns Unit
+            }
+            val weatherDatabaseDataSource = mock<WeatherDatabaseDataSource> {
+                everySuspend { getDailyWeatherForecastList() } returns flowOf(
+                    dailyForecastEntityList
+                )
+                everySuspend { deleteDailyWeatherForecastTable() } returns Unit
+                everySuspend { insertDailyWeatherForecastList(dailyForecastWeatherData.mapToDailyForecastEntityList()) } returns Unit
+            }
+            val weatherNetworkDataSource = mock<WeatherNetworkingDataSource> {
+                everySuspend { getDailyWeatherForecastData() } returns dailyForecastWeatherData
+            }
+            val getDailyWeatherForecastListRepository = GetDailyWeatherForecastListRepositoryImpl(
+                timerCache = timerCache,
+                weatherDatabaseDataSource = weatherDatabaseDataSource,
+                weatherNetworkDataSource = weatherNetworkDataSource
+            )
+
+            // WHEN
+            val result =
+                getDailyWeatherForecastListRepository.execute(invalidateCache).toList().first()
+
+            // THEN
+            val expectedResult = dailyForecastEntityList.mapToDailyForecastList()
+            assertContentEquals(expectedResult, result)
+            verifySuspend(mode = VerifyMode.exhaustiveOrder) {
+                @Suppress("UnusedFlow")
+                weatherDatabaseDataSource.getDailyWeatherForecastList()
+                weatherNetworkDataSource.getDailyWeatherForecastData()
+                timerCache.saveCacheTime()
+                weatherDatabaseDataSource.deleteDailyWeatherForecastTable()
+                weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyForecastWeatherData.mapToDailyForecastEntityList())
+            }
+        }
+
+    @Test
     fun `Verify data is fetched from the database and then from the network and saved to the database if the cache is expired`() =
         runTest {
             // GIVEN
+            val invalidateCache = false
             val dailyForecastEntityList =
                 Json.decodeFromString<List<DailyForecastEntity>>(DAILY_FORECAST_ENTITY_LIST)
             val dailyForecastWeatherData =
@@ -87,7 +135,8 @@ class GetDailyWeatherForecastListRepositoryImplTest {
             )
 
             // WHEN
-            val result = getDailyWeatherForecastListRepository.execute(false).toList().first()
+            val result =
+                getDailyWeatherForecastListRepository.execute(invalidateCache).toList().first()
 
             // THEN
             val expectedResult = dailyForecastEntityList.mapToDailyForecastList()
