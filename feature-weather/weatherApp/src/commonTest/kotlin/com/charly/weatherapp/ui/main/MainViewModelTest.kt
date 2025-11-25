@@ -57,12 +57,14 @@ class MainViewModelTest {
         val stringProvider = mock<StringProvider> {
             everySuspend { getStringForResource(Res.string.data_not_available_text) } returns "Not available"
         }
+        val mainViewModelReducer = mock<MainViewModelReducer>()
 
         // WHEN
         val mainViewModel = MainViewModel(
             getDailyWeatherForecastListUseCase = getDailyWeatherForecastListUseCase,
             dateFormatter = dateFormatter,
             stringProvider = stringProvider,
+            mainViewModelReducer = mainViewModelReducer,
             ioDispatcher = testDispatcher
         )
         assertIs<MainUiState.Loading>(mainViewModel.state.value.mainUiState)
@@ -146,12 +148,14 @@ class MainViewModelTest {
         }
         val dateFormatter = DateFormatter(TimeZone.UTC)
         val stringProvider = mock<StringProvider>()
+        val mainViewModelReducer = mock<MainViewModelReducer>()
 
         // WHEN
         val mainViewModel = MainViewModel(
             getDailyWeatherForecastListUseCase = getDailyWeatherForecastListUseCase,
             dateFormatter = dateFormatter,
             stringProvider = stringProvider,
+            mainViewModelReducer = mainViewModelReducer,
             ioDispatcher = testDispatcher
         )
         assertIs<MainUiState.Loading>(mainViewModel.state.value.mainUiState)

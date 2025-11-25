@@ -14,6 +14,7 @@ import com.charly.weatherapp.model.WeatherUnits
 import com.charly.weatherapp.provider.StringProvider
 import com.charly.weatherapp.ui.detail.DetailViewModel
 import com.charly.weatherapp.ui.main.MainViewModel
+import com.charly.weatherapp.ui.main.MainViewModelReducer
 import kotlinx.datetime.TimeZone
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -34,11 +35,13 @@ val weatherAppModule = module {
     factory<TemperatureFormatter> { TemperatureFormatter(weatherUnits = get()) }
     factory<DegreesFormatter> { DegreesFormatter() }
     factory<StringProvider> { StringProvider() }
+    factory<MainViewModelReducer> { MainViewModelReducer() }
     viewModel {
         MainViewModel(
             getDailyWeatherForecastListUseCase = get(),
             dateFormatter = get(),
-            stringProvider = get()
+            stringProvider = get(),
+            mainViewModelReducer = get()
         )
     }
     viewModel {

@@ -26,22 +26,12 @@ class MainViewModel(
     private val getDailyWeatherForecastListUseCase: GetDailyWeatherForecastListUseCase,
     private val dateFormatter: DateFormatter,
     private val stringProvider: StringProvider,
+    private val mainViewModelReducer: MainViewModelReducer,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
-        _state.update {
-            if (it.mainUiState is MainUiState.Success) {
-                it.copy(
-                    mainUiState = it.mainUiState.copy(
-                        isSnackBarVisible = true,
-                        isRefreshing = false
-                    )
-                )
-            } else {
-                it.copy(mainUiState = MainUiState.Error)
-            }
-        }
+        _state.update { mainViewModelReducer.reduce(it, Action.FetchError) }
     }
 
     private val _state = MutableStateFlow(MainScreenState())
@@ -58,13 +48,7 @@ class MainViewModel(
     }
 
     private fun fetchDailyWeatherForecast(invalidateCache: Boolean) {
-        _state.update {
-            if (it.mainUiState is MainUiState.Success) {
-                it.copy(mainUiState = it.mainUiState.copy(isRefreshing = true))
-            } else {
-                it.copy(mainUiState = MainUiState.Loading)
-            }
-        }
+        _state.update { mainViewModelReducer.reduce(it, Action.Fetching) }
         viewModelScope.launch(exceptionHandler) {
             getDailyWeatherForecastListUseCase.execute(invalidateCache)
                 .map {
@@ -75,7 +59,10 @@ class MainViewModel(
                 .flowOn(ioDispatcher)
                 .collect { dailyForecastMainModelList ->
                     _state.update {
-                        it.copy(mainUiState = MainUiState.Success(dailyForecastMainModelList = dailyForecastMainModelList))
+                        mainViewModelReducer.reduce(
+                            it,
+                            Action.FetchSuccess(dailyForecastMainModelList)
+                        )
                     }
                 }
         }
