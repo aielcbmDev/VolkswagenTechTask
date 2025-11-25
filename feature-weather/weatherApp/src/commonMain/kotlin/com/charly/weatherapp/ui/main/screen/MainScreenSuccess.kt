@@ -1,6 +1,7 @@
 package com.charly.weatherapp.ui.main.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.charly.weatherapp.ui.main.model.DailyForecastMainModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
@@ -58,48 +60,77 @@ fun MainScreenSuccess(
         },
         modifier = Modifier.fillMaxSize()
     ) { padding ->
-        PullToRefreshBox(
+        PullToRefreshList(
             isRefreshing = isRefreshing,
-            onRefresh = { onRetryButtonClicked.invoke() }
-        ) {
-            val state = rememberLazyListState()
-            LazyColumn(
-                state = state,
-                modifier = Modifier.padding(padding)
-            ) {
-                items(
-                    items = dailyForecastMainModelList,
-                    key = { item -> item.id }
-                ) { dailyForecastMainModel ->
-                    DailyItem(
-                        dailyForecastMainModel = dailyForecastMainModel,
-                        onDailyForecastModelClick = onDailyForecastModelClick
-                    )
-                }
-            }
-        }
-        if (isSnackBarVisible) {
-            scope.launch {
-                val result = snackBarHostState
-                    .showSnackbar(
-                        message = getString(Res.string.main_screen_snack_bar_message),
-                        actionLabel = getString(Res.string.main_screen_snack_bar_action_label),
-                        duration = SnackbarDuration.Indefinite
-                    )
-                when (result) {
-                    SnackbarResult.ActionPerformed -> {
-                        onRetryButtonClicked.invoke()
-                    }
+            dailyForecastMainModelList = dailyForecastMainModelList,
+            onDailyForecastModelClick = onDailyForecastModelClick,
+            onRetryButtonClicked = onRetryButtonClicked,
+            padding = padding
+        )
+        DisplaySnackBar(
+            coroutineScope = scope,
+            snackBarHostState = snackBarHostState,
+            isSnackBarVisible = isSnackBarVisible,
+            onRetryButtonClicked = onRetryButtonClicked
+        )
+    }
+}
 
-                    SnackbarResult.Dismissed -> {}
-                }
+@Composable
+private fun PullToRefreshList(
+    isRefreshing: Boolean,
+    dailyForecastMainModelList: List<DailyForecastMainModel>,
+    onDailyForecastModelClick: (Long) -> Unit,
+    onRetryButtonClicked: () -> Unit,
+    padding: PaddingValues
+) {
+    PullToRefreshBox(
+        isRefreshing = isRefreshing,
+        onRefresh = { onRetryButtonClicked.invoke() }
+    ) {
+        val state = rememberLazyListState()
+        LazyColumn(
+            state = state,
+            modifier = Modifier.padding(padding)
+        ) {
+            items(
+                items = dailyForecastMainModelList,
+                key = { item -> item.id }
+            ) { dailyForecastMainModel ->
+                DailyItem(
+                    dailyForecastMainModel = dailyForecastMainModel,
+                    onDailyForecastModelClick = onDailyForecastModelClick
+                )
             }
         }
     }
 }
 
 @Composable
-fun DailyItem(
+private fun DisplaySnackBar(
+    coroutineScope: CoroutineScope,
+    snackBarHostState: SnackbarHostState,
+    isSnackBarVisible: Boolean,
+    onRetryButtonClicked: () -> Unit
+) {
+    if (isSnackBarVisible) {
+        coroutineScope.launch {
+            val result = snackBarHostState
+                .showSnackbar(
+                    message = getString(Res.string.main_screen_snack_bar_message),
+                    actionLabel = getString(Res.string.main_screen_snack_bar_action_label),
+                    duration = SnackbarDuration.Indefinite
+                )
+            when (result) {
+                SnackbarResult.ActionPerformed -> onRetryButtonClicked.invoke()
+                else -> {}
+            }
+        }
+    }
+}
+
+@Composable
+private fun DailyItem(
     dailyForecastMainModel: DailyForecastMainModel,
     onDailyForecastModelClick: (Long) -> Unit,
     modifier: Modifier = Modifier
