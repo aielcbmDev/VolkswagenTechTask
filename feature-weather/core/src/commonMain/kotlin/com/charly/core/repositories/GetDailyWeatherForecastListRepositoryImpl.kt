@@ -35,7 +35,6 @@ class GetDailyWeatherForecastListRepositoryImpl(
 
     private suspend fun fetchAndSaveDailyWeatherForecast() {
         if (isCacheInvalid || timerCache.isCacheExpired()) {
-            val needsInvalidation = isCacheInvalid
             try {
                 val dailyWeatherForecastData =
                     weatherNetworkDataSource.getDailyWeatherForecastData()
@@ -45,9 +44,7 @@ class GetDailyWeatherForecastListRepositoryImpl(
                 weatherDatabaseDataSource.insertDailyWeatherForecastList(dailyEntityList)
                 isCacheInvalid = false
             } catch (e: Exception) {
-                if (needsInvalidation) {
-                    isCacheInvalid = false
-                }
+                isCacheInvalid = false
                 throw e
             }
         }
