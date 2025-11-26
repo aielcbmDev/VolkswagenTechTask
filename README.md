@@ -254,8 +254,5 @@ graph in the common code for both Android and iOS is essential for a true KMP ar
 While the current implementation provides a solid architectural foundation, the following items are
 key priorities for the continued development of this project:
 
-- **UI Theming and Dimensions**: Refine and standardize dimensions, colors, and typography across
-  the application to create a more polished user interface. Sorry for not handling dimensions and
-  theming properly but I prioritized other aspects of this technical task.
 - **Expanded Unit Test Coverage**: Increase test coverage by adding comprehensive unit tests for all
   mappers and data formatters throughout the application.

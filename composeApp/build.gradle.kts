@@ -36,8 +36,9 @@ kotlin {
             implementation(libs.koin.core)
         }
         commonMain.dependencies {
-            implementation(project(":di-qualifiers"))
             implementation(project(":feature-weather:weatherApp"))
+            implementation(project(":di-qualifiers"))
+            implementation(project(":ui-theme"))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)

@@ -63,6 +63,7 @@ kotlin {
             implementation(libs.kotlin.stdlib)
             // Add KMP dependencies here
             implementation(compose.runtime)
+            implementation(compose.material3)
             implementation(compose.ui)
         }
 

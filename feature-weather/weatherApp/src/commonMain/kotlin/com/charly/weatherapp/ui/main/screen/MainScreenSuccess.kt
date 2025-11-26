@@ -25,9 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import com.charly.uitheme.Dimensions
-import com.charly.uitheme.TypographySize
 import com.charly.weatherapp.ui.main.model.DailyForecastMainModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -56,7 +54,7 @@ fun MainScreenSuccess(
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(Res.string.main_screen_top_app_bar_title)) },
-                colors = TopAppBarDefaults.topAppBarColors(titleContentColor = Color.Red)
+                colors = TopAppBarDefaults.topAppBarColors(titleContentColor = MaterialTheme.colorScheme.primary)
             )
         },
         modifier = Modifier.fillMaxSize()
@@ -147,17 +145,15 @@ private fun DailyItem(
         ) {
             Text(
                 text = dailyForecastMainModel.dt,
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.outline,
-                fontSize = TypographySize.title,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary,
                 modifier = modifier.padding(top = Dimensions.medium, bottom = Dimensions.small),
             )
 
             Text(
                 text = dailyForecastMainModel.summary,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                fontSize = TypographySize.body
+                color = MaterialTheme.colorScheme.onSurface,
             )
         }
     }
