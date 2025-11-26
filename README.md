@@ -104,7 +104,7 @@ respective modules, leading to significant benefits:
 
 ### database (Android/iOS)
 
-The database serves as the single source of truth for all weather data. It powers both the daily
+The `database` serves as the single source of truth for all weather data. It powers both the daily
 forecast list and the detailed forecast views. It consists of a single table that stores an 8-day
 weather forecast. The schema for each daily entry includes the following fields:
 
@@ -121,7 +121,7 @@ weather forecast. The schema for each daily entry includes the following fields:
 
 ### networking (Android/iOS)
 
-The networking module is designed for both immediate functionality and future scalability. It
+The `networking` module is designed for both immediate functionality and future scalability. It
 fetches and comprehensively parses the entire server payload, rather than just the currently used
 fields. This design anticipates future feature requirements. A dedicated mapper then acts as an
 intermediary, filtering the complete dataset down to the specific fields needed by the database,
@@ -131,35 +131,35 @@ creating a clean separation between the raw server data and the application's in
 
 This module implements a simple key-value storage mechanism using Jetpack DataStore. It is used to
 persist a timestamp that tracks the age of the cached weather data, enabling the cache-first
-mechanism described in the core module.
+mechanism described in the `core` module.
 
 ### core
 
-The core module is the cornerstone of the data layer, responsible for implementing the application's
-cache-first strategy. It intelligently combines the functionality of the database, networking, and
-datastore modules to ensure that the UI always has access to the most relevant data. It manages the
-data lifecycle by checking cache validity, triggering network fetches for expired data, and updating
-the database. The reactive nature of Kotlin Flow ensures that these data updates are seamlessly and
-automatically propagated to the presentation layer.
+The `core` module is the cornerstone of the data layer, responsible for implementing the
+application's cache-first strategy. It intelligently combines the functionality of the `database`,
+`networking`, and `datastore` modules to ensure that the UI always has access to the most relevant
+data. It manages the data lifecycle by checking cache validity, triggering network fetches for
+expired data, and updating the database. The reactive nature of Kotlin Flow ensures that these data
+updates are seamlessly and automatically propagated to the presentation layer.
 
 ### domain
 
-The domain module serves as the architectural core of the application, containing all business logic
-and abstracting data operations. Following Clean Architecture principles, it inverts the flow of
-dependencies, ensuring that the data layer (core) adapts to the contracts defined here.This design
-enforces a clean separation of concerns, as the presentation layer (weatherApp) is completely
-decoupled from the data implementation details, interacting only with the domain's public
+The `domain` module serves as the architectural core of the application, containing all business
+logic and abstracting data operations. Following Clean Architecture principles, it inverts the flow
+of dependencies, ensuring that the data layer (`core`) adapts to the contracts defined here.This
+design enforces a clean separation of concerns, as the presentation layer (`weatherApp`) is
+completely decoupled from the data implementation details, interacting only with the domain's public
 interfaces. The module itself maintains maximum independence, depending only on the dependency
 injection framework (Koin) and testing tools.
 
 ### weatherAPP
 
-The weatherApp module is the final layer in this architecture, dedicated entirely to presentation.
-It communicates with the domain layer to access all application functionality, effectively
-decoupling the UI from the underlying data sources (core module). This module's scope is limited to
-rendering the UI for the weather feature and applying view-specific data formatting. This separation
-is further enforced by screen-level mappers, which adapt data models for display, ensuring the UI
-remains a simple and direct representation of the application's state.
+The `weatherApp` module is the final layer in this architecture, dedicated entirely to presentation.
+It communicates with the `domain` layer to access all application functionality, effectively
+decoupling the UI from the underlying data sources (`core` module). This module's scope is limited
+to rendering the UI for the weather feature and applying view-specific data formatting. This
+separation is further enforced by screen-level mappers, which adapt data models for display,
+ensuring the UI remains a simple and direct representation of the application's state.
 
 The presentation layer is structured using the Model-View-Intent (MVI) pattern. This choice was made
 to leverage MVI's strengths in creating predictable and maintainable UI code. Its core benefit is a
@@ -186,7 +186,7 @@ The main differences between MVI and MVVM are the following:
 
 ### composeAPP
 
-The composeApp module acts as the primary application shell and the integration point for all
+The `composeApp` module acts as the primary application shell and the integration point for all
 feature modules. While individual features like weatherApp contain their own UI and presentation
 logic, this module is responsible for higher-level application concerns:
 
@@ -202,7 +202,7 @@ application.
 
 ### di-qualifiers
 
-The di-qualifiers module serves a very specific but important purpose: it contains the dependency
+The `di-qualifiers` module serves a very specific but important purpose: it contains the dependency
 injection qualifiers used throughout the project.
 
 In a Koin-based dependency injection setup, qualifiers are used to distinguish between different
@@ -212,6 +212,26 @@ API key and a base URL), you would use qualifiers to tell Koin which one to inje
 By placing these qualifiers in their own dedicated module, they can be easily shared and accessed by
 any other module in the project that needs them, without creating unwanted dependencies or circular
 references. This keeps the DI setup clean, organized, and scalable.
+
+### ui-theme
+
+The `ui-theme` module is dedicated to defining the application's visual styling and branding. It
+centralizes all UI-related resources, such as colors, typography, and dimensions, ensuring a
+consistent look and feel across the entire app.
+
+This modular approach is a key architectural decision with several benefits:
+
+- **Centralized Control**: By having a single source of truth for the UI theme, we ensure visual
+  consistency across all feature modules. Any change to the brand's colors or typography is made
+  once and reflected everywhere.
+- **Improved Scalability**: As new features are added, they simply apply the shared theme,
+  eliminating redundant styling code and making the application easier to maintain and scale.
+- **Decoupled Development**: Feature teams can focus on building functionality without worrying
+  about specific color codes or font sizes. They consume the theme, but they don't own it. This
+  separation allows a dedicated team or developer to manage the application's visual identity
+  independently.
+- **Enhanced Reusability**: The self-contained theme module can be easily shared and reused across
+  other projects, ensuring brand consistency beyond a single application.
 
 ## Libraries
 
